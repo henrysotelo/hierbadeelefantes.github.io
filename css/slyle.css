@@ -96,13 +96,14 @@ header nav a:hover {
     background-image: url('hero-bg.jpg');
     background-size: cover;
     background-position: center;
-    height: 80vh;
+    height: 70vh;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #fff;
     text-align: center;
     margin-top: 0; /* Space for the fixed header */
+    flex-direction:column;
 }
 
 .hero-content {
