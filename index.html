@@ -1,12 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hierba de elefantes</title>
+    <title>Hierba de Elefantes</title>
+    <link rel="stylesheet" href="./css/slyle.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 </head>
 <body>
-    <h1>Hierba de elefantes</h1>
-    <h2>Bicho - Marin esta publicado, chicossss a trabajarrrr</h2>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="logo.png" alt="Hierba de Elefantes">
+            </div>
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="#"><i class="fas fa-seedling"></i> Productos</a></li>
+                    <li><a href="#"><i class="fas fa-info-circle"></i> Acerca de</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" placeholder="Buscar...">
+                <button class="search-button"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="menu-toggle" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Bienvenidos a Hierba de Elefantes</h1>
+                <p>Descubre la belleza y el poder de las plantas con nuestra colección exclusiva.</p>
+                <button onclick="scrollToGallery()">Explorar Galería</button>
+            </div>
+        </section>
+
+        <section id="gallery" class="gallery">
+            <h2>Nuestros Productos</h2>
+            <div class="gallery-container">
+                <div class="gallery-item"><img src="producto1.jpg" alt="Producto 1"></div>
+                <div class="gallery-item"><img src="producto2.jpg" alt="Producto 2"></div>
+                <div class="gallery-item"><img src="producto3.jpg" alt="Producto 3"></div>
+                <div class="gallery-item"><img src="producto4.jpg" alt="Producto 4"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Hierba de Elefantes. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="./js/scripts.js"></script>
 </body>
 </html>
