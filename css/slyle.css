@@ -23,6 +23,8 @@ header .container {
 
 header .logo img {
     height: 50px;
+    display: block;
+    margin: 0 auto;
 }
 
 header nav {
@@ -53,7 +55,20 @@ header nav a {
 }
 
 header nav a i {
-    margin-right: 10px;
+    font-size: 1.2rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+header nav a:hover i {
+    background-color: #fff;
+    color: var(--verde-principal);
 }
 
 header nav a:hover {
@@ -96,14 +111,13 @@ header nav a:hover {
     background-image: url('hero-bg.jpg');
     background-size: cover;
     background-position: center;
-    height: 70vh;
+    height: 65vh;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #fff;
     text-align: center;
     margin-top: 0; /* Space for the fixed header */
-    flex-direction:column;
 }
 
 .hero-content {
@@ -178,76 +192,18 @@ footer {
     padding: 20px 0;
 }
 
+/* Logo Section */
+.logo-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    background-color: var(--marfil);
+}
+.logo-section .logo img {
+    max-width: 400px;
+    width: 120%;
+    height: auto;
+}
+
 /* Responsive Styles */
-@media (max-width: 768px) {
-    header .container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    header nav {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background: linear-gradient(90deg, #74b749 0%, #8bc34a 100%);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    header nav ul {
-        flex-direction: column;
-    }
-
-    header nav li {
-        margin-right: 0;
-        margin-bottom: 10px;
-        width: 100%;
-    }
-
-    header nav a {
-        width: 100%;
-        text-align: center;
-        padding: 15px;
-    }
-
-    .search-container {
-        display: flex;
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    .search-container input {
-        width: 100%;
-        border-radius: 5px;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-
-    .hero h1 {
-        font-size: 2em;
-    }
-
-    .hero p {
-        font-size: 1.2em;
-    }
-
-    .hero button {
-        padding: 8px 16px;
-        font-size: 0.9em;
-    }
-
-    .gallery-item {
-        flex: 1 1 calc(50% - 20px);
-    }
-}
-
-@media (max-width: 480px) {
-    header nav ul {
-        align-items: center;
-    }
-
-    .gallery-item {
-        flex: 1 1 100%;
-    }
-}

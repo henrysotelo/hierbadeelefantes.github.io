@@ -1,63 +1,291 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hierba de Elefantes</title>
-    <link rel="stylesheet" href="./css/slyle.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hierba de Elefantes — ¡En cada planta, una historia!</title>
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --verde-principal: #3E5C49;
+      --marfil: #F5F4EF;
+      --terracota: #C98E70;
+      --gris-piedra: #A8A8A8;
+      --verde-salvia: #B9C9B0;
+      --verde-lima: #8ACF25;
+      --negro: #111;
+      --blanco: #fff;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --container: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--verde-principal);
+      background: var(--marfil);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    h1, h2, h3 { font-family: Poppins, Inter, Arial, sans-serif; margin: 0 0 .4rem; }
+    h1 { 
+        font-size: clamp(1rem, 4vw, 2rem);
+        font-weight: 700; }
+    h2 { 
+        font-size: clamp(1.2rem, 3.2vw, 2rem); 
+        font-weight: 600; }
+    p  { margin: .5rem 0 0; color: #26423a; }
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 20px; }
+
+    /* NAV sticky con blur */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(130%) blur(10px);
+      background: linear-gradient(90deg, rgba(138,207,37,.85), rgba(185,201,176,.85));
+      border-bottom: 1px solid rgba(62,92,73,.12);
+      box-shadow: 0 4px 18px rgba(62,92,73,0.70); /* Sombra sutil para la barra de navegación */
+    }
+    .nav-inner { display: flex; align-items: center; gap: 24px; height: 64px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--blanco); }
+    .brand img { 
+        width: 40px; 
+        height: 40px; 
+        object-fit: contain; 
+        /* background: #fff; */
+        border-radius: 50%; 
+        padding: 5px; 
+        box-shadow: 
+        var(--shadow); }
+    .brand span { font-weight: 700; letter-spacing: .2px; }
+    .nav-links { margin-left: auto; display: flex; gap: 18px; }
+    .nav-links a { color: var(--blanco); text-decoration: none; font-weight: 600; padding: 8px 12px; border-radius: 10px; }
+    .nav-links a:hover { background: rgba(255,255,255,.2); }
+
+    /* HERO limpio */
+    .hero { position: relative; 
+            padding: clamp(30px, 4vh, 140px) 0 72px;
+            background: radial-gradient(1200px 400px at 10% -10%, rgba(185,201,176,.45), transparent 60%),
+                        radial-gradient(1200px 400px at 90% 0%, rgba(138,207,37,.28), transparent 60%),#f7f6f2; 
+            border-bottom: 1px solid rgba(62,92,73,.08); }
+    .hero .title { max-width: 840px; margin: 0 auto; text-align: center; }
+    .slogan { color: var(--terracota); font-style: italic; margin-top: .25rem; }
+    .hero .cta { margin-top: 20px; display: inline-flex; gap: 12px; }
+    .btn { appearance: none; border: 0; border-radius: 999px; padding: 12px 20px; font-weight: 700; cursor: pointer; transition: .25s transform ease, .25s box-shadow ease, .25s background ease; }
+    .btn-primary { background: var(--verde-principal); color: var(--blanco); box-shadow: var(--shadow); }
+    .btn-primary:hover { transform: translateY(-2px); background: #2e4535; }
+    .btn-ghost { background: #fff; color: var(--verde-principal); border: 1px solid rgba(62,92,73,.15); }
+
+    /* LOGO centrado dentro de tarjeta blanca */
+    .logo-section { padding: 40px 0; }
+    .logo-card { 
+        /*background: rgba(255,255,255,0.7); /* Fondo blanco semitransparente */
+        /*opacity: 0.92; /* Opacidad adicional para efecto visual */
+        border: 1px solid rgba(62,92,73,.08); 
+        border-radius: var(--radius); 
+        box-shadow: var(--shadow); 
+        padding: 28px; 
+        display: grid; 
+        place-items: center; 
+        width: min(560px, 92%); 
+        margin: 0 auto; }
+    .logo-card img { width: clamp(120px, 26vw, 220px); height: auto; display: block; }
+
+    /* PRODUCTOS — cards minimalistas */
+    .products { padding: 56px 0; }
+    .products-header { text-align: center; margin-bottom: 28px; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+    @media (max-width: 1024px){ .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px){ .grid { grid-template-columns: 1fr; } }
+    .card { background: #fff; border: 1px solid rgba(62,92,73,.08); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform .25s ease, box-shadow .25s ease; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.12); }
+    .card-figure { position: relative; aspect-ratio: 4/5; overflow: hidden; }
+    .card-figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .badge { position: absolute; top: 12px; left: 12px; background: rgba(62,92,73,.9); color: #fff; font-size: .8rem; padding: 6px 10px; border-radius: 999px; }
+    .card-body { padding: 16px; }
+    .card-title { font-weight: 700; margin: 0; }
+    .card-desc { margin: 6px 0 14px; color: #466a57; font-size: .95rem; }
+    .price { font-weight: 700; color: var(--verde-principal); }
+    .add { margin-left: auto; }
+
+    /* GALERÍA reutiliza los estilos existentes de .gallery-grid */
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 1rem; }
+
+    /* FOOTER */
+    footer { padding: 40px 0; background: var(--verde-principal); color: #fff; text-align: center; margin-top: 56px; }
+
+    /* Accesibilidad / motion */
+    @media (prefers-reduced-motion: reduce){
+      * { transition: none !important; animation: none !important; }
+    }
+      /* ======== Responsive base ======== */
+    img { max-width: 100%; height: auto; }
+    .title { padding: 0 12px; }
+
+    /* ======== Mobile Nav (≤ 860px) ======== */
+    .hamburger { display: none; cursor: pointer; width: 44px; height: 44px; border-radius: 12px; align-items: center; justify-content: center; margin-left: auto; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: #fff; margin: 4px 0; transition: transform .25s ease, opacity .2s ease; }
+
+    @media (max-width: 860px){
+      .nav-inner { height: 60px; }
+      .nav-links { 
+        position: fixed; 
+        inset: 45px 0 auto 0; 
+        display: flex; flex-direction: column; gap: 0; background: linear-gradient(180deg, rgba(185,201,176,.98), rgba(138,207,37,.96)); border-bottom: 1px solid rgba(62,92,73,.1); padding: 10px 16px 16px; transform: translateY(-120%); transition: transform .25s ease; }
+      .nav-links a { padding: 12px 10px; border-radius: 10px; font-size: 1rem; }
+      .hamburger { display: inline-flex; }
+      .menu-toggle:checked ~ .hamburger span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+      .menu-toggle:checked ~ .hamburger span:nth-child(2){ opacity: 0; }
+      .menu-toggle:checked ~ .hamburger span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+      .menu-toggle:checked ~ #primary-nav { transform: translateY(0); }
+    }
+
+    /* ======== Responsive Hero ======== */
+    @media (max-width: 860px){
+      .hero { padding: 56px 0 56px; }
+      .hero .title { width: 92%; }
+    }
+    @media (max-width: 560px){
+      h1 { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+      .btn { padding: 10px 16px; }
+      .hero .cta { flex-wrap: wrap; justify-content: center; }
+    }
+
+    /* ======== Responsive Products Grid (ya existía) ======== */
+    @media (max-width: 1024px){ .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px){ .grid { grid-template-columns: 1fr; } }
+
+    /* ======== Footer spacing ======== */
+    @media (max-width: 560px){ footer { padding: 28px 0; } }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <img src="logo.png" alt="Hierba de Elefantes">
-            </div>
-            <nav id="navMenu">
-                <ul>
-                    <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
-                    <li><a href="#"><i class="fas fa-seedling"></i> Productos</a></li>
-                    <li><a href="#"><i class="fas fa-info-circle"></i> Acerca de</a></li>
-                    <li><a href="#"><i class="fas fa-envelope"></i> Contacto</a></li>
-                </ul>
-            </nav>
-            <div class="search-container">
-                <input type="text" placeholder="Buscar...">
-                <button class="search-button"><i class="fas fa-search"></i></button>
-            </div>
-            <div class="menu-toggle" id="mobileMenu">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
-    </header>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#inicio" class="brand">
+        <img src="./img/logoBlanco.png" alt="Logo Hierba de Elefantes" />
+        <span>Hierba de Elefantes</span>
+      </a>
+      <input id="menu-toggle" class="menu-toggle" type="checkbox" hidden>
+      <label class="hamburger" for="menu-toggle" aria-label="Abrir menú" aria-controls="primary-nav">
+        <span></span><span></span><span></span>
+      </label>
+      <nav id="primary-nav" class="nav-links">
+        <a href="#productos">Productos</a>
+        <a href="#galeria">Galería</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
 
-    <main>
-        <section class="hero">
-            <div>
-                <img src="./img/logo.svg" alt="Hierba de Elefantes">
-            </div>
-            <div class="hero-content">
-                <h1>Bienvenidos a Hierba de Elefantes</h1>
-                <p>Descubre la belleza y el poder de las plantas con nuestra colección exclusiva.</p>
-                <button onclick="scrollToGallery()">Explorar Galería</button>
-            </div>
-        </section>
+  <section id="inicio" class="hero">
+    <div class="container title">
+      <h1>Bienvenidos a Hierba de Elefantes</h1>
+      <h2 class="slogan">¡En cada planta, una historia!</h2>
+      <p>Decoración de interiores con plantas y paisajismo para hogares, oficinas y comercios.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#productos">Explorar productos</a>
+        <a class="btn btn-ghost" href="#contacto">Cotizar proyecto</a>
+      </div>
+    </div>
+  </section>
 
-        <section id="gallery" class="gallery">
-            <h2>Nuestros Productos</h2>
-            <div class="gallery-container">
-                <div class="gallery-item"><img src="producto1.jpg" alt="Producto 1"></div>
-                <div class="gallery-item"><img src="producto2.jpg" alt="Producto 2"></div>
-                <div class="gallery-item"><img src="producto3.jpg" alt="Producto 3"></div>
-                <div class="gallery-item"><img src="producto4.jpg" alt="Producto 4"></div>
+  <section class="logo-section">
+    <div class="logo-card">
+      <img src="./img/logo.svg" alt="Hierba de Elefantes" />
+    </div>
+  </section>
+
+  <section id="productos" class="products">
+    <div class="container">
+      <div class="products-header">
+        <h2>Nueva colección</h2>
+        <p>Selección curada para tu portada — cuatro piezas icónicas.</p>
+      </div>
+      <div class="grid">
+        <!-- Producto 1 -->
+        <article class="card">
+          <figure class="card-figure">
+            <span class="badge">Producto 1</span>
+            <img src="./img/portada-suculenta.png" alt="Suculenta Echeveria en maceta cerámica" loading="lazy" />
+          </figure>
+          <div class="card-body">
+            <h3 class="card-title">Echeveria</h3>
+            <p class="card-desc">Textura geométrica y mantenimiento mínimo.</p>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span class="price">$—</span>
+              <a class="btn btn-ghost add" href="#contacto">Consultar</a>
             </div>
-        </section>
-    </main>
+          </div>
+        </article>
+        <!-- Producto 2 -->
+        <article class="card">
+          <figure class="card-figure">
+            <span class="badge">Producto 2</span>
+            <img src="./img/portada-montera.png" alt="Monstera deliciosa en maceta" loading="lazy" />
+          </figure>
+          <div class="card-body">
+            <h3 class="card-title">Monstera</h3>
+            <p class="card-desc">Hojas icónicas para espacios protagonistas.</p>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span class="price">$—</span>
+              <a class="btn btn-ghost add" href="#contacto">Consultar</a>
+            </div>
+          </div>
+        </article>
+        <!-- Producto 3 -->
+        <article class="card">
+          <figure class="card-figure">
+            <span class="badge">Producto 3</span>
+            <img src="./img/portada-helecho.png" alt="Palmera y helecho en cesto de ratán" loading="lazy" />
+          </figure>
+          <div class="card-body">
+            <h3 class="card-title">Palmera + Helecho</h3>
+            <p class="card-desc">Altura, frescura y movimiento natural.</p>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span class="price">$—</span>
+              <a class="btn btn-ghost add" href="#contacto">Consultar</a>
+            </div>
+          </div>
+        </article>
+        <!-- Producto 4 -->
+        <article class="card">
+          <figure class="card-figure">
+            <span class="badge">Producto 4</span>
+            <img src="./img/portada-orquidea.png" alt="Orquídea Phalaenopsis en maceta pastel" loading="lazy" />
+          </figure>
+          <div class="card-body">
+            <h3 class="card-title">Orquídea</h3>
+            <p class="card-desc">Elegancia atemporal para interiores delicados.</p>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span class="price">$—</span>
+              <a class="btn btn-ghost add" href="#contacto">Consultar</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <p>&copy; 2023 Hierba de Elefantes. Todos los derechos reservados.</p>
-    </footer>
+  <section id="galeria" class="container" style="padding: 40px 0;">
+    <h2>Galería</h2>
+    <div class="gallery-grid" style="margin-top: 14px;">
+      <!-- coloca aquí más imágenes de proyectos reales -->
+    </div>
+  </section>
 
-    <script src="./js/scripts.js"></script>
+  <footer id="contacto">
+    <div class="container">
+      <p>WhatsApp: +57 301 637 8689 · Email: hierbadeelefantes@gmail.com</p>
+      <p>© <span id="year"></span> Hierba de Elefantes — ¡En cada planta, una historia!</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
